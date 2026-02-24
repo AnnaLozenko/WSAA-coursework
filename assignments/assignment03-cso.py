@@ -18,7 +18,8 @@ print(f"Response Header: {response.headers}")
 with open("cso.json", "w") as jsonfp:
     json.dump(response.json(), jsonfp, indent=4)
 
-# function that retrieves data from an API and stores it into a file with a given filename.
+#Alternative solution: function that retrieves data from an API, prints out the response status code.
+# If the response is successful, it stores the data in a JSON file. If the response is not successful, it prints out an error message.
 def save_to_json(filename, url):
     response = requests.get(url)
     data = response.json()
@@ -29,6 +30,7 @@ def save_to_json(filename, url):
     else:
         print("Failed to retrieve data from the API")
 
+# use the function to retrieve the dataset for the "exchequer account (historical series)" from the CSO, and store it into a file called "cso.json".
 save_to_json("cso.json", "https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.ReadDataset/FIQ02/JSON-stat/2.0/en")
 
 
