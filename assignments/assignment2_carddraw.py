@@ -44,7 +44,7 @@ def draw_and_check_hand(card_count=5):
             print("Congratulations! You have drawn four of a kind!")
 
     # Check for flush (same suit)
-    if 5 in suit_count.values():
+    if card_count in suit_count.values():
         print("Congratulations! You have drawn all cards of the same suit!")
 
     # Check for straight
@@ -60,7 +60,7 @@ def draw_and_check_hand(card_count=5):
     '''
     drawn_indices = sorted(value_order.index(value) for value in drawn_values)
 
-     # Step 4: check if all indicies in drawn_values are consecutive and in ascending order. If true, then we have a straight
+    # Step 4: check if all indicies in drawn_values are consecutive and in ascending order. If true, then we have a straight
     is_straight = all(
         drawn_indices[i] + 1 == drawn_indices[i + 1]
         for i in range(len(drawn_indices) - 1)
