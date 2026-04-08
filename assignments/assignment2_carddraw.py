@@ -48,11 +48,19 @@ def draw_and_check_hand(card_count=5):
         print("Congratulations! You have drawn all cards of the same suit!")
 
     # Check for straight
-    value_order = ['2', '3', '4', '5', '6', '7', '8', '9', '10',
-                   'JACK', 'QUEEN', 'KING', 'ACE']
+    # Step 1: value_order contains all card values in ascending order
+    value_order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'JACK', 'QUEEN', 'KING', 'ACE']
+    # Step 2: drawn_values contains all card values that have been drawn from the API
     drawn_values = [card['value'] for card in cards]
+    '''
+     Step 3: drawn_indices contains index of each drawn card inside value_order array, in sorted ascending order
+     Examples:
+     * drawn_values = [ 5, 8, QUEEN, KING, ACE ]      --> drawn_indices = [ 3, 6, 10, 11, 12 ]
+     * drawn_values = [ 10, JACK, QUEEN, KING, ACE ]  --> drawn_indices = [ 8, 9, 10, 11, 12 ]
+    '''
     drawn_indices = sorted(value_order.index(value) for value in drawn_values)
 
+     # Step 4: check if all indicies in drawn_values are consecutive and in ascending order. If true, then we have a straight
     is_straight = all(
         drawn_indices[i] + 1 == drawn_indices[i + 1]
         for i in range(len(drawn_indices) - 1)
